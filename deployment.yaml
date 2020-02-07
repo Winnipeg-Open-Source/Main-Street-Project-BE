@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
         - name: main-street-project-be
-          image: gcr.io/striking-shadow-267417/main-street-project-be
+          image: gcr.io/$PROJECT_ID/main-street-project-be
           ports:
             - containerPort: 8080
