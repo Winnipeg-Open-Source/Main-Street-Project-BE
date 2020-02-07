@@ -28,7 +28,7 @@ Coming Soon...
 ##### Request
 ```json
 {
-  "role": "donor", // Set user's role (only accepted by admin, defaults to donor)
+  "role": "donor",
   "name": "Name",
   "email": "donations@organization.com"
 }
@@ -116,12 +116,12 @@ Coming Soon...
   "locations": [
     {
       "location_id": 1,
-      "condition_id": 1,
+      "condition": "Great",
       "quantity": 5
     },
     {
       "location_id": 2,
-      "condition_id": 1,
+      "condition": "Good",
       "quantity": 10,
       "notes": "Overflow from Fridge 1"
     }
@@ -137,12 +137,12 @@ Coming Soon...
   "locations": [
     {
       "location_id": 1,
-      "condition": 1,
+      "condition": "Great",
       "quantity": 5,
     },
     {
       "location_id": 2,
-      "condition_id": 1,
+      "condition": "Good",
       "quantity": 10,
       "notes": "Overflow from Fridge 1"
     }
@@ -158,7 +158,7 @@ Coming Soon...
   "locations": [
     {
       "location_id": 2,
-      "condition": 1,
+      "condition": "Great",
       "quantity": 10
     }
   ]
@@ -172,7 +172,7 @@ Coming Soon...
   "locations": [
     {
       "location_id": 2,
-      "condition": 1,
+      "condition": "Great",
       "quantity": 10
     }
   ]
@@ -206,7 +206,7 @@ Coming Soon...
   "locations": [
     {
       "location_id": 1,
-      "quantity": 
+      "quantity": 5
     }
   ]
 }
