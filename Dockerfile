@@ -1,15 +1,15 @@
-FROM mhart/alpine-node:12.14.1
+FROM node:12.14.1 as builder
+WORKDIR .
+COPY package*.json ./
+RUN npm ci
+COPY src/ ./src/
+RUN npm run build
 
-WORKDIR /server
-
-ENV PATH /server/node_modules/.bin:$PATH
-
-COPY package*.json /server/
-
+FROM node:12.14.1-alpine
+WORKDIR .
+ENV PATH /node_modules/.bin:$PATH
+COPY package*.json ./
 RUN npm ci --prod --silent
-
-COPY . /server/
-
+COPY --from=builder /dist/ ./dist/
 EXPOSE 8080
-
 CMD ["npm", "run", "start-prod"]
