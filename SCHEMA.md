@@ -29,19 +29,20 @@
 |     name     | string |      null      |    yes   |
 |  description | string |      null      |    no    |
 | retail_value |   int  |      null      |    yes   |
-|   locations  | array  |      null      |    yes   |
 |     notes    | string |      null      |    no    |
 
-Locations Structure
-```
-[
-  {
-      location_id: long,
-      quantity: int,
-      condition: string,
-  }
-]
-```
+
+#### line_items
+
+|      column     |  type  |     default    | required |
+|:---------------:|:------:|:--------------:|:--------:|
+|       _id       |  long  | auto_increment |    yes   |
+|     item_id     |  long  |      null      |    yes   |
+|   location_id   |  long  |      null      |    yes   |
+|     quantity    |   int  |      null      |    no    |
+|  retail_value   |   int  |      null      |    yes   |
+| expiration_date |   int  |      null      |    yes   |
+|      notes      | string |      null      |    no    |
 
 
 #### donations
@@ -50,7 +51,7 @@ Locations Structure
 |:---------------:|:------:|:--------------:|:--------:|
 |       _id       |  long  | auto_increment |    yes   |
 |     user_id     |  long  |      null      |    yes   |
-|     item_ids    | array  |      null      |    no    |
+|  line_item_ids  | array  |      null      |    yes   |
 |      title      | string |      null      |    yes   |
 |   description   | string |      null      |    no    |
 |  donation_date  |  date  |      null      |    yes   |
@@ -64,7 +65,7 @@ Locations Structure
 |:----------------:|:------:|:--------------:|:--------:|
 |        _id       |  long  | auto_increment |    yes   |
 |      user_id     |  long  |      null      |    yes   |
-|      item_ids    | array  |      null      |    no    |
+|  line_item_ids   | array  |      null      |    yes   |
 |       title      | string |      null      |    yes   |
 |    description   | string |      null      |    no    |
 | requisition_date |  date  |      null      |    yes   |
