@@ -6,7 +6,7 @@ ENV PATH /server/node_modules/.bin:$PATH
 
 COPY package*.json /server/
 
-RUN npm install --silent
+RUN npm ci --prod --silent
 
 COPY . /server/
 
