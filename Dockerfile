@@ -1,15 +1,14 @@
-FROM mhart/alpine-node:12.14.1
+FROM node:12.14.1 as builder
+WORKDIR .
+COPY package*.json .babelrc ./
+RUN npm ci --silent
+COPY src/ ./src/
+RUN npm run build
 
-WORKDIR /server
-
-ENV PATH /server/node_modules/.bin:$PATH
-
-COPY package*.json /server/
-
-RUN npm install --silent
-
-COPY . /server/
-
+FROM node:12.14.1-alpine
+WORKDIR .
+COPY package*.json ./
+RUN npm ci --prod --silent
+COPY --from=builder /dist/ ./dist/
 EXPOSE 8080
-
-CMD ["npm", "start"]
+CMD ["npm", "run", "start-prod"]

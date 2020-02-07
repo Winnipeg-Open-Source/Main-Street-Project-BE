@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "install-gcp-sdk": "./scripts/install-gcp-sdk.sh",
     "start": "nodemon --exec babel-node ./src/index.js",
+    "start-prod": "NODE_ENV=production node ./dist/index.js",
+    "build": "babel -d ./dist ./src -s",
+    "prebuild": "npm run clean",
+    "clean": "rimraf ./dist",
     "test": "PORT=8081 jest"
   },
   "dependencies": {
@@ -19,6 +24,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
+    "rimraf": "^3.0.1",
     "supertest": "^4.0.2"
   }
 }
