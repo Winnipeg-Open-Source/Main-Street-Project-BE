@@ -13,7 +13,7 @@ steps:
     args:
       - "set"
       - "image"
-      - "deployment/hotel-roulette-api"
+      - "deployment/main-street-project-be"
       - "hotel-roulette-api=gcr.io/$PROJECT_ID/main-street-project-be:$REVISION_ID"
     env:
       - "CLOUDSDK_COMPUTE_ZONE=us-central1-a"
