@@ -5,6 +5,7 @@
   "scripts": {
     "install-gcp-sdk": "./scripts/install-gcp-sdk.sh",
     "start": "nodemon --exec babel-node ./src/index.js",
+    "start-prod": "NODE_ENV=production ./src/index.js",
     "test": "PORT=8081 jest"
   },
   "dependencies": {
