@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "installGCPSDK": "./scripts/installGCPSDK.sh",
     "start": "nodemon --exec babel-node ./src/index.js",
     "test": "PORT=8081 jest"
   },
