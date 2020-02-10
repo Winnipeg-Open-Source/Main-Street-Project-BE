@@ -1,4 +1,6 @@
-export const DB_URL = 'mongodb://mongodb:27017/main-street-project-inventory';
-export const DB_NAME = 'main-street-project-inventory';
-
-export const DONOR_COLLECTION = 'donors';
+export const DONATIONS_COLLECTION = 'Donations';
+export const ITEMS_COLLECTION = 'Items';
+export const LINE_ITEMS_COLLECTION = 'Line Items';
+export const LOCATIONS_COLLECTION = 'Locations';
+export const REQUISITIONS_COLLECTION = 'Requisitions';
+export const USERS_COLLECTION = 'Users';

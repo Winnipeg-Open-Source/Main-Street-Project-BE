@@ -12,6 +12,7 @@
     "test": "PORT=8081 jest"
   },
   "dependencies": {
+    "@google-cloud/firestore": "^3.5.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongodb": "^3.4.1"
@@ -20,6 +21,7 @@
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "jest": "^25.1.0",
