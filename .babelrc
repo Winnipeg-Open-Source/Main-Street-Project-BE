@@ -17,8 +17,6 @@
                     "api": "./src/api",
                     "constants": "./src/constants",
                     "fixtures": "./src/fixtures",
-                    "middleware": "./src/middleware",
-                    "repos": "./src/repos",
                     "utils": "./src/utils"
                 }
             }
