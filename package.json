@@ -1,16 +1,15 @@
 {
   "name": "main-street-project-server",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "install-gcp-sdk": "./scripts/install-gcp-sdk.sh",
     "start": "nodemon --exec babel-node ./src/index.js",
-    "start:firebase": "npm run start & firebase emulators:start",
+    "start:firebase": "firebase emulators:start",
     "start-prod": "NODE_ENV=production node ./dist/index.js",
     "build": "babel -d ./dist ./src -s",
     "prebuild": "npm run clean",
     "clean": "rimraf ./dist",
-    "test": "PORT=8081 jest"
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

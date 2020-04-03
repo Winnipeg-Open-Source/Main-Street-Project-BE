@@ -13,9 +13,10 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
-    const { id, ...donor } = req.body;
-    const result = await update(DONORS_COLLECTION, id, donor);
-
+    const { _id, ...donor } = req.body;
+    const result = await update(DONORS_COLLECTION, _id, donor);
+    
+    res.status(200);
     res.json(result);
 });
 
@@ -43,7 +44,7 @@ router.delete('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
     const result = await deleteOne(DONORS_COLLECTION, id);
 
-    if (result.deletedCount === 0) {
+    if (!result) {
         res.status(404).send('Donor not found.');
     } else {
         res.send('Donor deleted.');
