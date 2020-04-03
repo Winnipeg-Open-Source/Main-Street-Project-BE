@@ -3,8 +3,8 @@ import { DONORS_COLLECTION } from 'constants/collections';
 import { create, update, get, getAll, deleteOne } from 'utils/firebase';
 import { mockDonor, mockDonors } from 'fixtures/donors';
 
-describe('donor api', () => {
-    it('post', async () => {
+describe ('donor api', () => {
+    it ('post', async () => {
         create.mockImplementation(async () => mockDonor);
 
         const response = await request.post('/api/donors').send(mockDonor);
@@ -16,32 +16,32 @@ describe('donor api', () => {
         expect(response.body).toStrictEqual(mockDonor);
     });
 
-    it('put', async () => {
+    it ('put', async () => {
         update.mockImplementation(async () => mockDonor);
 
-        const { _id, ...donor } = mockDonor;
+        const { id, ...donor } = mockDonor;
         const response = await request.put('/api/donors').send(mockDonor);
 
         expect(update).toHaveBeenCalledTimes(1);
-        expect(update).toHaveBeenCalledWith(DONORS_COLLECTION, _id, donor);
+        expect(update).toHaveBeenCalledWith(DONORS_COLLECTION, id, donor);
 
         expect(response.statusCode).toBe(200);
         expect(response.body).toStrictEqual(mockDonor);
     });
 
-    it('get', async () => {
+    it ('get', async () => {
         get.mockImplementation(async () => mockDonor);
 
         const response = await request.get('/api/donors/1');
 
         expect(get).toHaveBeenCalledTimes(1);
-        expect(get).toHaveBeenCalledWith(DONORS_COLLECTION, 1);
+        expect(get).toHaveBeenCalledWith(DONORS_COLLECTION, "1");
 
         expect(response.statusCode).toBe(200);
         expect(response.body).toStrictEqual(mockDonor);
     });
 
-    it('get not found', async () => {
+    it ('get not found', async () => {
         get.mockImplementation(async () => null);
 
         const response = await request.get('/api/donors/1');
@@ -50,7 +50,7 @@ describe('donor api', () => {
         expect(response.text).toBe('Donor not found.');
     });
 
-    it('get all', async () => {
+    it ('get all', async () => {
         getAll.mockImplementation(async () => mockDonors);
 
         const response = await request.get('/api/donors');
@@ -62,7 +62,7 @@ describe('donor api', () => {
         expect(response.body).toStrictEqual(mockDonors);
     });
 
-    it('get all none found', async () => {
+    it ('get all none found', async () => {
         getAll.mockImplementation(async () => []);
 
         const response = await request.get('/api/donors');
@@ -71,24 +71,15 @@ describe('donor api', () => {
         expect(response.body).toStrictEqual([]);
     });
 
-    it('delete', async () => {
+    it ('delete', async () => {
         deleteOne.mockImplementation(async () => mockDonor);
 
         const response = await request.delete('/api/donors/1');
 
         expect(deleteOne).toHaveBeenCalledTimes(1);
-        expect(deleteOne).toHaveBeenCalledWith(DONORS_COLLECTION, 1);
+        expect(deleteOne).toHaveBeenCalledWith(DONORS_COLLECTION, "1");
 
         expect(response.statusCode).toBe(200);
         expect(response.text).toBe('Donor deleted.');
-    });
-
-    it('delete not found', async () => {
-        deleteOne.mockImplementation(async () => null);
-
-        const response = await request.delete('/api/donors/1');
-
-        expect(response.statusCode).toBe(404);
-        expect(response.text).toBe('Donor not found.');
     });
 });
