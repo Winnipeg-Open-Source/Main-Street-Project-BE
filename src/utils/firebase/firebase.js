@@ -13,19 +13,29 @@ const firebaseConfig = {
     measurementId: "G-F0J5X7MPXP"
 };
 
-firebase.initializeApp(firebaseConfig);
+let provider, auth, db;
 
-if (typeof window === 'object' && window.location.hostname === 'localhost') {
-    console.log('Using emulated firestore.');
-    firebase.firestore().settings({
-        host: 'localhost:8081',
-        ssl: false,
-    });
+if (process.env.NODE_ENV !== 'test') {
+    firebase.initializeApp(firebaseConfig);
+
+    if (typeof window === 'object' && window.location.hostname === 'localhost') {
+        console.log('Using emulated firestore.');
+        firebase.firestore().settings({
+            host: 'localhost:8081',
+            ssl: false,
+        });
+    }
+
+    provider = new firebase.auth.GoogleAuthProvider();
+    auth = new firebase.auth();
+    db = firebase.firestore();
 }
 
-export const provider = new firebase.auth.GoogleAuthProvider();
-export const auth = new firebase.auth();
-export const db = firebase.firestore();
+export {
+    auth,
+    db,
+    provider,
+};
 
 export const create = async (collection, data) => {
     return await db.collection(collection).doc().set(data);
