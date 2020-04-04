@@ -13,15 +13,21 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
-    const { _id, ...donor } = req.body;
-    const result = await update(DONORS_COLLECTION, _id, donor);
-    
-    res.status(200);
-    res.json(result);
+    try {
+        const { id, ...donor } = req.body;
+        const response = await update(DONORS_COLLECTION, id, donor);
+        res.json(response);
+    } catch (err) {
+        if (err.code === 'not-found') {
+            res.status(404).send('Donor not found.');
+        } else {
+            res.status(500).send('Internal Server Error');
+        }
+    }
 });
 
 router.get('/:id', async (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     const donor = await get(DONORS_COLLECTION, id);
 
     if (!donor) {
@@ -41,14 +47,9 @@ router.get('/', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const id = parseInt(req.params.id);
-    const result = await deleteOne(DONORS_COLLECTION, id);
-
-    if (!result) {
-        res.status(404).send('Donor not found.');
-    } else {
-        res.send('Donor deleted.');
-    }
+    const id = req.params.id;
+    await deleteOne(DONORS_COLLECTION, id);
+    res.send('Donor deleted.');
 });
 
 export default router;

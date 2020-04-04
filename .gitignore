@@ -5,3 +5,5 @@ dist/
 .idea
 .vscode
 .DS_STORE
+
+firebase-debug.log

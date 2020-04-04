@@ -38,15 +38,29 @@ export {
 };
 
 export const create = async (collection, data) => {
-    return await db.collection(collection).doc().set(data);
+    const doc = await db.collection(collection).add(data);
+    return {
+        id: doc.id,
+        ...data,
+    };
 };
 
 export const update = async (collection, id, data) => {
-    return await db.collection(collection).doc(id).update(data);
+    await db.collection(collection).doc(id).update(data);
+    return {
+        id,
+        ...data,
+    };
 };
 
 export const get = async (collection, id) => {
-    return await db.collection(collection).doc(id).get();
+    const doc = await db.collection(collection).doc(id).get();
+    return doc.exists
+        ? {
+            id: doc.id,
+            ...doc.data(),
+        }
+        : null;
 };
 
 export const getAll = async (collection) => {
@@ -56,7 +70,10 @@ export const getAll = async (collection) => {
     documents.forEach(doc => {
         response = [
             ...response,
-            doc.data(),
+            {
+                id: doc.id,
+                ...doc.data(),
+            },
         ]
     });
 
