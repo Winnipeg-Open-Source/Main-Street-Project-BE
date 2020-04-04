@@ -13,8 +13,8 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
-    const { id, ...donor } = req.body;
     try {
+        const { id, ...donor } = req.body;
         const response = await update(DONORS_COLLECTION, id, donor);
         res.json(response);
     } catch (err) {

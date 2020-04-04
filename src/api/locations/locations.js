@@ -13,8 +13,8 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
-    const { id, ...location } = req.body;
     try {
+        const { id, ...location } = req.body;
         const response = await update(LOCATIONS_COLLECTION, id, location);
         res.json(response);
     } catch (err) {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
     const location = await get(LOCATIONS_COLLECTION, id);
 
     if (!location) {
-        res.status(404).send('Location not found');
+        res.status(404).send('Location not found.');
     } else {
         res.json(location);
     }
