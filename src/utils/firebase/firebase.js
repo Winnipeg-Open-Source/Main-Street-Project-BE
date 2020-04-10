@@ -38,7 +38,11 @@ export {
 };
 
 export const create = async (collection, data) => {
-    const doc = await db.collection(collection).add(data);
+    const doc = await db.collection(collection).add({
+        ...data,
+        created: firebase.firestore.FieldValue.serverTimestamp(),
+        updated: firebase.firestore.FieldValue.serverTimestamp(),
+    });
     return {
         id: doc.id,
         ...data,
@@ -46,7 +50,10 @@ export const create = async (collection, data) => {
 };
 
 export const update = async (collection, id, data) => {
-    await db.collection(collection).doc(id).update(data);
+    await db.collection(collection).doc(id).update({
+        ...data,
+        updated: firebase.firestore.FieldValue.serverTimestamp(),
+    });
     return {
         id,
         ...data,
@@ -63,9 +70,13 @@ export const get = async (collection, id) => {
         : null;
 };
 
-export const getAll = async (collection) => {
-    const documents = await db.collection(collection).get();
+export const getAll = async (collection, filters = []) => {
+    const documentRef = db.collection(collection);
+    const filteredRef = filters.reduce((ref, { key, check, value }) => {
+        return ref.where(key, check, value);
+    }, documentRef);
 
+    const documents = await filteredRef.get();
     let response = [];
     documents.forEach(doc => {
         response = [

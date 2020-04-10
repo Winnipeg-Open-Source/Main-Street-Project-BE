@@ -16,6 +16,7 @@
                 "alias": {
                     "api": "./src/api",
                     "constants": "./src/constants",
+                    "services": "./src/services",
                     "utils": "./src/utils",
                     "fixtures": "./tests/fixtures",
                     "tests": "./tests"

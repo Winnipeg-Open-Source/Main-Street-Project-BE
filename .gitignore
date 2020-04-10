@@ -6,4 +6,5 @@ dist/
 .vscode
 .DS_STORE
 
+firebase-debug.log
 firestore-debug.log
