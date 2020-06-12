@@ -2,7 +2,6 @@
   "name": "main-street-project-server",
   "version": "0.1.0",
   "scripts": {
-    "install-gcp-sdk": "./scripts/install-gcp-sdk.sh",
     "start": "nodemon --exec babel-node ./src/index.js",
     "start:firebase": "firebase emulators:start",
     "start-prod": "NODE_ENV=production node ./dist/index.js",
